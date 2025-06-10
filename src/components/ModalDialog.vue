@@ -188,39 +188,7 @@ watch(
           </span>
         </div>
       </div>
-
-      <!-- Checkboxes Section -->
-      <div class="mb-4">
-        <label class="block font-semibold mb-1">Subtask</label>
-        <div
-          v-for="(item, index) in localCard.checkboxes"
-          :key="index"
-          class="flex items-center mb-2"
-        >
-          <input
-            v-model="item.checked"
-            type="checkbox"
-            class="mr-2 accent-green-500"
-          />
-          <input
-            v-model="item.label"
-            type="text"
-            placeholder="Label"
-            class="flex-1 border p-1 rounded mr-2"
-          />
-          <button @click="removeCheckbox(index)" class="text-red-500 font-bold">
-            &times;
-          </button>
-        </div>
-        <button
-          @click="addCheckbox"
-          class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-sm"
-        >
-          Add Subtask
-        </button>
-      </div>
-
-      <!-- Links Section -->
+       <!-- Links Section -->
       <!-- Links Section -->
       <div class="mb-4">
         <label class="block font-semibold mb-1">Links</label>
@@ -263,6 +231,39 @@ watch(
           </li>
         </ul>
       </div>
+
+      <!-- Checkboxes Section -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Subtask</label>
+        <div
+          v-for="(item, index) in localCard.checkboxes"
+          :key="index"
+          class="flex items-center mb-2"
+        >
+          <input
+            v-model="item.checked"
+            type="checkbox"
+            class="mr-2 accent-green-500"
+          />
+          <input
+            v-model="item.label"
+            type="text"
+            placeholder="Label"
+            class="flex-1 border p-1 rounded mr-2"
+          />
+          <button @click="removeCheckbox(index)" class="text-red-500 font-bold">
+            &times;
+          </button>
+        </div>
+        <button
+          @click="addCheckbox"
+          class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-sm"
+        >
+          Add Subtask
+        </button>
+      </div>
+
+     
 
       <!-- Image Upload Section -->
       <!-- Image Upload Section -->
