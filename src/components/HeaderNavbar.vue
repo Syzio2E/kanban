@@ -1,10 +1,14 @@
 <template>
-  <header class="w-full pl-0 px-6 py-4 flex items-center justify-between">
+  <header
+    class="w-full pl-0 pr-4 sm:pr-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between flex-wrap gap-y-1 sm:gap-y-0"
+  >
     <!-- Left side -->
-    <h1 class="text-xl font-semibold text-gray-800">Your Tasks</h1>
+    <h1 class="text-lg sm:text-xl font-semibold text-gray-800">
+      Your Tasks
+    </h1>
 
     <!-- Right side buttons -->
-    <div class="flex gap-3">
+    <div class="flex gap-1 sm:gap-3">
       <button
         class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
         @click="$emit('add-task')"
@@ -22,6 +26,5 @@
 </template>
 
 <script setup lang="ts">
-// No script logic needed unless you want local state
 defineEmits(['add-task', 'invite']);
 </script>

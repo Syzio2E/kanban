@@ -1,15 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import DashBoard from '@/pages/DashBoard.vue' 
 
 const routes = [
   {
     path: '/',
-    redirect: '/dashboard'
+    component: DefaultLayout, 
+    children: [
+       {
+        path: '',
+        redirect: 'dashboard'
+      },
+      {
+        path: 'dashboard',
+        component: DashBoard
+      },
+    ]
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/components/ModalDialog.vue')
-  },
+    path: '/:catchAll(.*)',
+    redirect: '/dashboard'
+  }
 ]
 
 const router = createRouter({
