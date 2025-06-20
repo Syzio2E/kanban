@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {computed, reactive, ref} from 'vue'
+import { computed, reactive, ref } from 'vue'
 import Draggable from 'vuedraggable'
-import ModalDialog from '../components/ModalDialog.vue';
-import { type Card, type List } from '../types';
+import ModalDialog from '../components/ModalDialog.vue'
+import { type Card, type List } from '../types'
 import HeaderNavbar from '../components/HeaderNavbar.vue'
 import LabelTag from '../components/LabelTag.vue'
 
@@ -40,7 +40,7 @@ const lists = reactive<List[]>([
 const isModalOpen = ref(false)
 const editingCard = ref<Card | null>(null)
 const editingListIndex = ref<number | null>(null)
-const modalMode = computed(() => editingCard.value === null ? 'add' : 'edit')
+const modalMode = computed(() => (editingCard.value === null ? 'add' : 'edit'))
 
 const openModal = (listIndex: number, card?: Card) => {
   editingListIndex.value = listIndex
@@ -55,12 +55,12 @@ const saveCard = (card: Card) => {
 
   if (modalMode.value === 'add') {
     // ✅ Assign a unique new ID
-    const allIds = lists.flatMap(list => list.cards.map(c => c.id))
+    const allIds = lists.flatMap((list) => list.cards.map((c) => c.id))
     const newId = allIds.length ? Math.max(...allIds) + 1 : 1
     currentList.cards.push({ ...card, id: newId })
   } else {
     // ✅ Editing existing card
-    const cardIndex = currentList.cards.findIndex(c => c.id === card.id)
+    const cardIndex = currentList.cards.findIndex((c) => c.id === card.id)
     if (cardIndex !== -1) {
       currentList.cards[cardIndex] = { ...card }
     }
@@ -68,7 +68,6 @@ const saveCard = (card: Card) => {
 
   closeModal()
 }
-
 
 const closeModal = () => {
   isModalOpen.value = false
@@ -80,19 +79,19 @@ const closeModal = () => {
 <template>
   <div class="min-h-screen w-screen items-center justify-center bg-gray-50">
     <main class="flex-1 w-full max-w-6xl mx-auto px-6 py-8 font-sans">
-     <div class="w-full max-w-6xl mx-auto px-4 sm:px-6">
-  <HeaderNavbar @add-task="handleAddTask" @invite="handleInvite" />
-</div>
+      <div class="w-full max-w-6xl mx-auto px-4 sm:px-6">
+        <HeaderNavbar @add-task="handleAddTask" @invite="handleInvite" />
+      </div>
       <div class="flex flex-wrap gap-5 py-5 sm:flex-row">
         <div
-          class="bg-gray-100 p-3 rounded-lg min-w-[350px] flex flex-col"
+          class="p-3 rounded-lg min-w-[350px] flex flex-col"
           v-for="(list, listIndex) in lists"
           :key="list.id"
         >
           <h2 class="font-medium mb-2">{{ list.title }}</h2>
 
           <Draggable :list="list.cards" group="cards" item-key="id">
-            <template #item="{element}">
+            <template #item="{ element }">
               <div
                 @click="openModal(listIndex, element)"
                 class="bg-white p-2 my-2 rounded shadow cursor-pointer"
@@ -102,9 +101,7 @@ const closeModal = () => {
                   {{ element.description }}
                 </p>
                 <div v-if="element.checkboxes?.length" class="mt-3" @click.stop>
-                  <h4 class="text-[11px] font-semibold text-gray-500 mb-1">
-                    Subtasks
-                  </h4>
+                  <h4 class="text-[11px] font-semibold text-gray-500 mb-1">Subtasks</h4>
                   <ul class="space-y-1 text-xs text-gray-600">
                     <li
                       v-for="(item, idx) in element.checkboxes"
@@ -117,9 +114,7 @@ const closeModal = () => {
                         @click.stop
                         class="h-3 w-3 accent-green-500"
                       />
-                      <span
-                        :class="{ 'line-through text-gray-400': item.checked }"
-                      >
+                      <span :class="{ 'line-through text-gray-400': item.checked }">
                         {{ item.label }}
                       </span>
                     </li>
@@ -161,11 +156,7 @@ const closeModal = () => {
                   </div>
                 </div>
                 <!-- Images Section -->
-                <div
-                  v-if="element.images?.length"
-                  class="mt-2 flex flex-wrap gap-2"
-                  @click.stop
-                >
+                <div v-if="element.images?.length" class="mt-2 flex flex-wrap gap-2" @click.stop>
                   <img
                     v-for="(img, idx) in element.images"
                     :key="'img-' + idx"
@@ -175,15 +166,8 @@ const closeModal = () => {
                   />
                 </div>
 
-                <div
-                  v-if="element.tags?.length"
-                  class="flex flex-wrap gap-1 mt-2"
-                >
-                  <LabelTag
-                    v-for="(tag, idx) in element.tags"
-                    :key="idx"
-                    :label="tag"
-                  />
+                <div v-if="element.tags?.length" class="flex flex-wrap gap-1 mt-2">
+                  <LabelTag v-for="(tag, idx) in element.tags" :key="idx" :label="tag" />
                 </div>
 
                 <!-- Show checklist if any -->
@@ -191,12 +175,12 @@ const closeModal = () => {
             </template>
           </Draggable>
 
-          <button
+          <!-- <button
             class="w-full bg-transparent rounded hover:bg-white text-gray-500 p-2 text-left mt-2 text-sm font-medium"
             @click="openModal(listIndex)"
           >
             + Add Card
-          </button>
+          </button> -->
         </div>
       </div>
 
