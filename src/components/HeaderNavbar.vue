@@ -17,14 +17,33 @@
       </button>
       <button
         class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium"
-        @click="$emit('invite')"
+       @click="openModal"
       >
         Invite
       </button>
     </div>
   </header>
+    <InviteModal
+    :is-open="isInviteModalOpen"
+    @close="isInviteModalOpen = false"
+    @invite="handleInvite"
+  />
 </template>
 
 <script setup lang="ts">
 defineEmits(['add-task', 'invite']);
+
+import { ref } from 'vue'
+import InviteModal from './InviteModal.vue'
+
+const isInviteModalOpen = ref(false)
+
+function openModal() {
+  isInviteModalOpen.value = true
+}
+
+function handleInvite(email: string) {
+  console.log('Inviting:', email)
+  // You can send this email to an API
+}
 </script>
